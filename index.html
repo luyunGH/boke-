@@ -1,0 +1,605 @@
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+            <script src="./lib/pace/pace.min.js?v=1.0.2"></script>
+            <link href="./lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet" />
+            <link rel="stylesheet" type="text/css" href="css/base.css" />
+            <link rel="stylesheet" type="text/css" href="css/common.css" />
+            <link rel="stylesheet" type="text/css" href="css/login.css" />
+            <title>编程浪子的技术博客</title>
+        </head>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .fixed {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background: #D2D8DE;
+            }
+            .navigator {
+                background: black;
+                height: 60px;
+                line-height: 60px;
+                overflow: hidden;
+                clear: both;
+            }
+            .navigator .navList {
+                max-height: 30px;
+                float: left;
+            }
+            .navigator .navList li {
+                float: left;
+            }
+            .navList a {
+                color: #bbb;
+                display: block;
+                padding: 0 30px;
+                line-height: 60px;
+                font-family: '微软雅黑';
+            }
+            .user {
+                color: #fff;
+                float: right;
+                margin-right: 20px;
+                color: red;
+                font-family: '微软雅黑';
+                font-size: 20px;
+            }
+            .main {
+                height: auto;
+                padding: 20px 0 0 10px;
+            }
+            .container {
+                float: right;
+                margin-left: -250px;
+                width: 100%;
+            }
+            .forFlow {
+                margin-left: 250px;
+                margin-right: 20px;
+                float: none;
+            }
+            .sideBar {
+                width: 230px;
+                height: 100%;
+                float: left;
+            }
+            .sideBar .sideBarMain .newsItem {
+                padding: 10px;
+                font-family: '微软雅黑';
+                line-height: 1.5;
+                background: #FAFCFD;
+                border-radius: 10px;
+                margin-bottom: 15px;
+                box-shadow: 1px 1px 2px #A7A8AD;
+            }
+            .sideBar .sideBarMain .dateView {
+                width: 100%;
+                margin-bottom: 15px;
+                box-shadow: 1px 1px 2px #A7A8AD;
+            }
+            .layui-laydate-main.laydate-main-list-0 {
+                width: 100%;
+            }
+            .sideBar .sideBarMain .read-books {
+                width: 100%;
+                background: #FAFCFD;
+                border-radius: 7px;
+                box-shadow: 1px 1px 2px #A7A8AD;
+                margin-bottom: 15px;
+            }
+            .sideBar .sideBarMain .read-books .read-books-title {
+                background: #390;
+                border-bottom: 1px solid #006600;
+                border-top-left-radius: 7px;
+                border-top-right-radius: 7px;
+                color: #fff;
+                font-family: '微软雅黑';
+                font-size: 16px;
+                line-height: 1.8;
+                padding: 5px;
+                text-indent: .5em;
+                text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+            }
+            .sideBar .sideBarMain .read-books .read-books-list ul li {
+                font-family: '微软雅黑';
+                text-indent: 1em;
+                font-size: 12px;
+                padding: 10px 5px;
+                border-bottom: 1px solid #DADFE1;
+                border-top: 1px solid #FFFFFF;
+            }
+            .sideBar .sideBarMain .read-books .read-books-list ul li:last-child {
+                border: none;
+            }
+            /* 博客主体 */
+            .forFlow .day {
+                min-height: 20px;
+                padding: 5px 20px 10px;
+                background: #fff;
+                border-radius: 7px;
+                box-shadow: 1px 1px 2px #A7A8AD;
+                margin-bottom: 15px;
+                color: #666;
+            }
+            .forFlow .day .day-itle {
+                width: 100%;
+                color: #666;
+                line-height: 2.2;
+                font-size: 22px;
+                font-family: '微软雅黑';
+                border-bottom: 1px solid #ccc;
+                text-align: center;
+            }
+            .forFlow .day .day-post-title {
+                width: 100%;
+                line-height: 2.5;
+                font-size: 18px;
+                font-weight: bold;
+                border-bottom: 1px dashed  #ccc;
+
+            }
+            .forFlow .day .day-post-title a {
+                color: #390;
+                transition: all 0.4s linear 0s;
+            }
+            .forFlow .day .day-post-contaniner {
+                width: 100%;
+                line-height: 1.5;
+                padding: 10px 0;
+            }
+            .forFlow .day .day-post-contaniner .desc {
+                font-size: 14px;
+                font-family: '微软雅黑';
+                word-wrap: break-word;
+                word-break: break-all;
+                overflow: hidden;
+                line-height: 1.5;
+            }
+            .forFlow .day .day-post-contaniner .desc a {
+                color: blue;
+                text-decoration: underline;
+                transition: all 0.4s linear 0s;
+            }
+            .forFlow .day .day-post-contaniner .desc a:hover {
+                color: red;
+            }
+            .forFlow .day .day-flow {
+                width: 100%;
+                text-align: right;
+                font-size: 14px;
+                font-family: '微软雅黑';
+                color: #A8B1BA;
+                line-height: 1.5;
+            }
+            /* 网站底部 */
+            footer {
+                text-align: center;
+                min-height: 20px;
+                margin: 10px 0;
+                padding: 10px;
+                border-top: 1px solid black;
+                font-size: 16px;
+                font-family: '微软雅黑';
+            }
+            @media screen and (max-width: 760px) and (min-width: 450px) {
+                .user {
+                    display: none;
+                }
+                .main {
+                    padding: 10px;
+                }
+                .container {
+                    margin-left: 0;
+                }
+                .forFlow {
+                    width: 100%;
+                    margin-left: 0;
+                }
+                .sideBar {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+                .sideBar .sideBarMain .dateView {
+                    width: 100%;
+                    margin-bottom: 15px;
+                    box-shadow: 1px 1px 2px #A7A8AD;
+                }
+                #layui-laydate1 {
+                    width: 100%;
+                }
+                .layui-laydate-content table {
+                    width: 100%;
+                }
+                .layui-laydate-main.laydate-main-list-0 {
+                    width: 100%;
+                }
+            }
+            @media screen and (max-width: 600px) and (min-width: 360px) {
+                .user {
+                    display: none;
+                }
+                .navigator {
+                    background: black;
+                    height: 40px;
+                    line-height: 40px;
+                    overflow: hidden;
+                    clear: both;
+                }
+                .navigator .navList {
+                    max-height: 30px;
+                    float: left;
+                }
+                .navigator .navList li:nth-child(2) {
+                    display: none;
+                }
+                .navigator .navList li:nth-child(4) {
+                    display: none;
+                }
+                .navList a {
+                    color: #bbb;
+                    display: block;
+                    padding: 0 30px;
+                    line-height: 40px;
+                    font-family: '微软雅黑';
+                }
+                .main {
+                    padding: 10px;
+                }
+                .container {
+                    margin-left: 0;
+                }
+                .forFlow {
+                    width: 100%;
+                    margin-left: 0;
+                }
+                .sideBar {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+                .sideBar .sideBarMain .dateView {
+                    width: 100%;
+                    margin-bottom: 15px;
+                    box-shadow: 1px 1px 2px #A7A8AD;
+                }
+                #layui-laydate1 {
+                    width: 100%;
+                }
+                .layui-laydate-content table {
+                    width: 100%;
+                }
+                .layui-laydate-main.laydate-main-list-0 {
+                    width: 100%;
+                }
+                .login {
+                    width: auto;
+                    height: 260px;
+                    border-radius: 20px;
+                }
+            }
+            @media screen and (max-width: 360px) and (min-width: 320px) {
+                .user {
+                    display: none;
+                }
+                .navList a {
+                    color: #bbb;
+                    display: block;
+                    padding: 0 25px;
+                    height: 40px;
+                    line-height: 40px;
+                    font-family: '微软雅黑';
+                }
+                .main {
+                    height: auto;
+                    padding: 10px;
+                }
+                .container {
+                    margin-left: 0;
+                }
+                .forFlow {
+                    width: 100%;
+                    margin-left: 0;
+                }
+                .sideBar {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+                .sideBar .sideBarMain .dateView {
+                    width: 100%;
+                    margin-bottom: 15px;
+                    box-shadow: 1px 1px 2px #A7A8AD;
+                }
+                #layui-laydate1 {
+                    width: 100%;
+                }
+                .layui-laydate-content table {
+                    width: 100%;
+                }
+                .layui-laydate-main.laydate-main-list-0 {
+                    width: 100%;
+                }
+                .login {
+                    width: auto;
+                    height: 260px;
+                    border-radius: 20px;
+                }
+            }
+            @media screen and (max-width: 320px) and (min-width: 100px) {
+                .user {
+                    display: none;
+                }
+                .navigator {
+                    height: 35px;
+                    line-height: 35px;
+                }
+                .navigator .navList {
+                    line-height: 35px;
+                    float: left;
+                }
+                .navigator .navList li:nth-child(2) {
+                    display: none;
+                }
+                .navigator .navList li:nth-child(4) {
+                    display: none;
+                }
+                .navList a {
+                    color: #bbb;
+                    display: block;
+                    padding: 0 24px;
+                    height: 35px;
+                    line-height: 35px;
+                    font-family: '微软雅黑';
+                }
+                .main {
+                    padding: 10px;
+                }
+                .container {
+                    margin-left: 0;
+                }
+                .forFlow {
+                    width: 100%;
+                    margin-left: 0;
+                }
+                .sideBar {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+                .layui-laydate.layui-laydate-hint {
+                    width: 100%;
+                }
+                .sideBar .sideBarMain .dateView {
+                    width: 100%;
+                    margin-bottom: 15px;
+                    box-shadow: 1px 1px 2px #A7A8AD;
+                }
+                #layui-laydate1 {
+                    width: 100%;
+                }
+                .layui-laydate-content table {
+                    width: 100%;
+                }
+                .layui-laydate-main.laydate-main-list-0 {
+                    width: 100%;
+                }
+                .login {
+                    width: auto;
+                    height: 260px;
+                    border-radius: 20px;
+                }
+            }
+            
+        </style>
+        <body>
+            <div class="navigator" id='navigator'> 
+                <ul class='navList'>
+                    <li>
+                        <a href="#">首页</a>
+                    </li>
+                    <li>
+                        <a href="#">新随笔</a>
+                    </li>
+                    <li>
+                        <a href="#">联系</a>
+                    </li>
+                    <li>
+                        <a href="#">订阅</a>
+                    </li>
+                    <li>
+                        <a href="#" id='login'>登录</a>
+                    </li>
+                    <li>
+                        <a href="#">注册</a>
+                    </li>
+                </ul>
+                <div class='user'>
+                    编程浪子的技术博客
+                </div>
+            </div>
+            <div class='main clearfloat'>
+                <div class="container">
+                    <div class="forFlow">
+                        <div class="day">
+                            <div class="day-itle">
+                                <a href="#">
+                                    2018年5月15号
+                                </a>
+                            </div>
+                            <div class="day-post-title">
+                                <a href="#" class='title-hover'>
+                                    Ajax工作原理及实例
+                                </a>
+                            </div>
+                            <div class="day-post-contaniner">
+                                <div class="desc">
+                                    若，人生只是初见，我是否还会在每一次相聚的时刻，脑海里就已经勾勒出别离的画面？若，人生只是初见，我是否还会在每一个安静的午夜，发疯似得去找寻曾经存在过的痕迹？若，人生只是初见，我是否还会在每一个独处的瞬间，像傻子一样微笑的回味着自己的经历？若，人生只是初见，我是否还会在每一次别离的过后，躲在无人发现的角落里独自黯然神伤？
+                                    <a href="#">阅读全文</a>
+                                </div>
+                            </div>
+                            <div class="day-flow">
+                                编程浪子 在线阅读(19) 评论(0)  
+                            </div>
+                        </div>
+                        <div class="day">
+                            <div class="day-itle">
+                                <a href="#">
+                                    2018年5月15号
+                                </a>
+                            </div>
+                            <div class="day-post-title">
+                                <a href="#" class='title-hover'>
+                                    自从你来到我身边
+                                </a>
+                            </div>
+                            <div class="day-post-contaniner">
+                                <div class="desc">
+                                    自从你来到我身边，生命中再也没有了孤单，每个日子都变得那么甜，总想偷偷哼支歌，放飞青春的自我，顺便把心事诉说，有你，就有春天，蝶儿蹁跹，繁花朵朵，爱的画卷任我涂抹，你送我梦的衣裳，在你爱的苍穹，我恣意翱翔，你给我纯纯的爱，我还你浓浓的情，陪你看尘世繁华，花落花开
+                                    <a href="#">阅读全文</a>
+                                </div>
+                            </div>
+                            <div class="day-flow">
+                                编程浪子 在线阅读(19) 评论(0)  
+                            </div>
+                        </div>
+                        <div class="day">
+                            <div class="day-itle">
+                                <a href="#">
+                                    2018年5月15号
+                                </a>
+                            </div>
+                            <div class="day-post-title">
+                                <a href="#" class='title-hover'>
+                                    Ajax工作原理及实例
+                                </a>
+                            </div>
+                            <div class="day-post-contaniner">
+                                <div class="desc">
+                                    若，人生只是初见，我是否还会在每一次相聚的时刻，脑海里就已经勾勒出别离的画面？若，人生只是初见，我是否还会在每一个安静的午夜，发疯似得去找寻曾经存在过的痕迹？若，人生只是初见，我是否还会在每一个独处的瞬间，像傻子一样微笑的回味着自己的经历？若，人生只是初见，我是否还会在每一次别离的过后，躲在无人发现的角落里独自黯然神伤？
+                                    <a href="#">阅读全文</a>
+                                </div>
+                            </div>
+                            <div class="day-flow">
+                                编程浪子 在线阅读(19) 评论(0)  
+                            </div>
+                        </div>
+                        <div class="day">
+                            <div class="day-itle">
+                                <a href="#">
+                                    2018年5月15号
+                                </a>
+                            </div>
+                            <div class="day-post-title">
+                                <a href="#" class='title-hover'>
+                                    Ajax工作原理及实例
+                                </a>
+                            </div>
+                            <div class="day-post-contaniner">
+                                <div class="desc">
+                                    若，人生只是初见，我是否还会在每一次相聚的时刻，脑海里就已经勾勒出别离的画面？若，人生只是初见，我是否还会在每一个安静的午夜，发疯似得去找寻曾经存在过的痕迹？若，人生只是初见，我是否还会在每一个独处的瞬间，像傻子一样微笑的回味着自己的经历？若，人生只是初见，我是否还会在每一次别离的过后，躲在无人发现的角落里独自黯然神伤？
+                                    <a href="#">阅读全文</a>
+                                </div>
+                            </div>
+                            <div class="day-flow">
+                                编程浪子 在线阅读(19) 评论(0)  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sideBar">
+                    <div class="sideBarMain">
+                        <div class="newsItem">
+                            称呢：<a href="#">编程浪子</a> <br>
+                            年龄：<a href="#">18</a> <br>
+                            粉丝：<a href="#">1</a> <br>
+                            关注：<a href="#">1</a> <br>
+                            <a href="#">加关注</a>
+                        </div>
+                        <div class="dateView" id='dateView'></div>
+                        <div class="read-books">
+                            <h3 class='read-books-title'>阅读排行榜</h3>
+                            <div class="read-books-list">
+                                <ul>
+                                    <li>
+                                        <a href="#">1. 日照香炉生紫烟</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">2. 遥看瀑布挂前川</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">3. 飞流直下三千尺</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">4. 疑是银河落九天</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="read-books">
+                            <h3 class='read-books-title'>阅读排行榜</h3>
+                            <div class="read-books-list">
+                                <ul>
+                                    <li>
+                                        <a href="#">1. 君不见黄河之水天上来</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">2. 奔流到海不复回</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">3. 君不见高堂明镜悲白发</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">4. 朝如青丝暮成雪</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">5. 人生得意须尽欢，莫使金樽...</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>@ 2018 编程浪子 web前端技术</footer>
+            <div class="login-container" id='login_container'>
+                <div class="login" id='locin_box'>
+                    <div class="close" id='close'>关闭</div>
+                    <div class="login-user">
+                        <input type='text' placeholder="请输入用户名" />
+                        <input type='text' placeholder="请输入验证码" />
+                        <input type='password' placeholder="请输入密码" />
+                    </div>
+                    <div>
+                        <button>登录</button>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="./lib/canvas-nest/canvas-nest.min.js"></script>
+            <script type="text/javascript" src='./lib/laydate/laydate.js'></script>
+            <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+            <script type="text/javascript">
+                laydate.render({
+                    elem: '#dateView',
+                    position: 'static',
+                    showBottom: false
+                });
+                // $('#login').on('click', function () {
+                //     $('#login_container').fadeIn(500);
+                // });
+                // $('#close').on('click', function () {
+                //     $('#login_container').fadeOut(500);
+                // });
+            </script>
+        </body>
+    </html>
